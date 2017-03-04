@@ -21,11 +21,15 @@ router.post('/json', (req, res, next) => {
 router.get('/json/:key', (req, res) => {
     const key = req.params.key;
     res.set('Content-Type', 'application/json');
-    if (!DataManager.has(key)){
-        res.status(404).end();
-    } else {
-        res.send(DataManager.get(key));
-    }
+    DataManager.has(key, (hasData) => {
+        if (hasData){
+            DataManager.get(key, (data) => {
+                res.send(data).end();
+            });
+        } else {
+            res.status(404).end();
+        }
+    })
 });
 
 module.exports = router;

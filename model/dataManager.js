@@ -1,5 +1,12 @@
 const dataStore = new Map();
 const Json = require('./jsonModel');
+const redis = require("redis"),
+    client = redis.createClient({host: '127.0.2.1'});
+
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+
 
 class DataManager {
 
@@ -15,15 +22,21 @@ class DataManager {
     }
 
     static save(json){
-        dataStore.set(json.key, json.json);
+        const stringy = JSON.stringify(json.json)
+        client.hset(json.key, 'json', stringy);
+        // dataStore.set(json.key, json.json);
     }
 
-    static get(key){
-        return dataStore.get(key);
+    static get(key, cb){
+       client.hget(key, 'json', (err, res) =>{
+            cb(res);
+        })
     }
 
-    static has(key){
-        return dataStore.has(key);
+    static has(key, cb){
+        client.exists(key, (err, res) => {
+            cb(Boolean(res));
+        })
     }
 
     static size(){
