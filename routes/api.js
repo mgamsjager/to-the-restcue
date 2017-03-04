@@ -1,11 +1,31 @@
 const express = require('express');
 const router = express.Router();
+const randomstring = require("randomstring");
+const jsonModel = require("../model/jsonModel");
+const DataManager = require('../model/dataManager');
 
-/* GET home page. */
+router.get('/json', (req, res, next) => {
+    res.redirect('/');
+});
+
 router.post('/json', (req, res, next) => {
-    console.log(req.body)
-    res.status(201).redirect('/');
+    try {
+        const jsonObject = JSON.parse(req.body.json);
+        const jsonModel = DataManager.newModel()(randomstring.generate(5), jsonObject);
+        res.status(201).render('generated', {url: `/api/json/${jsonModel.key}`, jsonData: JSON.stringify(jsonModel.jsonString, null, '\t')})
+    } catch (e){
+        res.redirect('/');
+    }
+});
 
+router.get('/json/:key', (req, res) => {
+    const key = req.params.key;
+    res.set('Content-Type', 'application/json');
+    if (!DataManager.has(key)){
+        res.status(404).end();
+    } else {
+        res.send(DataManager.get(key));
+    }
 });
 
 module.exports = router;

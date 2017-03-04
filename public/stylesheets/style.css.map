@@ -2,8 +2,8 @@
 	"version": 3,
 	"file": "style.css",
 	"sources": [
-		"style.sass"
+		"style.scss"
 	],
-	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,WAAW,EAAE,IAAK,GAAG",
-	"names": []
+	"names": [],
+	"mappings": "AAGA,AAAA,OAAO,AAAC,CACN,MAAM,CAHH,GAAG,CAIP,AAED,AAAA,OAAO,AAAC,CACN,OAAO,CARJ,GAAG,CASP"
 }

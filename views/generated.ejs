@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <title>To the RESTcue</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -16,37 +16,20 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
+<div class="container m-a-lg">
+
     <div class="row justify-content-center">
-        <div class="col-6 my-4 ">
-          <h1 class="display-3">To the RESTcue</h1>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <form action="/api/json" method="post">
-                <div class="input-group">
-                    <textarea class="p-a-md" name="json" id="" cols="50" rows="10"></textarea>
-                </div>
-                <br>
-                <button  class="btn btn-primary btn-lg" role="button">Create JSON</button>
-            </form>
+        <div class="col-6 ">
+            <div class="display-4 my-4">Your JSON object:</div>
+            <pre class="jumbotron"><%= jsonData %></pre>
         </div>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-4">
-            <small class="text-muted">Front-end developers rescued: <%= items%></small>
+        <div class="col-2">
+            <a href="<%= url %>"> <%= url %></a>
         </div>
     </div>
 </div>
-
-<script>
-    var placeHolder = {name: "Tommy", age: 23, employed: true};
-    var formatted = JSON.stringify(placeHolder, null, 4 );
-    document.querySelector('textarea').innerHTML = formatted;
-    document.querySelector('textarea').setAttribute('placeholder', formatted);
-
-</script>
 </body>
 </html>

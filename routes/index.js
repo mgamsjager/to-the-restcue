@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const DataManager = require('../model/dataManager');
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'To the RESTcue' });
+  res.render('index', { title: 'To the RESTcue', items: DataManager.size() });
 });
 
 module.exports = router;

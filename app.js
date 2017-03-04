@@ -4,8 +4,15 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const compression = require('compression')
+
+//routes
 const index = require('./routes/index');
 const api = require('./routes/api');
+
+//
+const jsonModel = require("./model/jsonModel");
 
 const app = express();
 
@@ -15,17 +22,23 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
+app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true,
-  sourceMap: true
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+    sourceMap: true,
+    outputStyle: 'compressed'
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', index);
 app.use('/api', api);

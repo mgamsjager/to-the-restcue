@@ -1,3 +1,10 @@
-body {
-  font-family: Abel;
+$md: 1em;
+$lg: 2em;
+
+.m-a-lg {
+  margin: $lg;
+}
+
+.p-a-md {
+  padding: $md;
 }
