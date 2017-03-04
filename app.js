@@ -61,4 +61,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//config
+app.set('trust proxy', 'loopback');
+
 module.exports = app;

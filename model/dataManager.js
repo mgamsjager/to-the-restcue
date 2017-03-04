@@ -1,7 +1,7 @@
-const dataStore = new Map();
 const Json = require('./jsonModel');
+const config = require('../config');
 const redis = require("redis"),
-    client = redis.createClient({host: '127.0.2.1'});
+    client = redis.createClient({host: config.redis});
 
 client.on("error", function (err) {
     console.log("Error " + err);
@@ -24,7 +24,7 @@ class DataManager {
     static save(json){
         const stringy = JSON.stringify(json.json)
         client.hset(json.key, 'json', stringy);
-        // dataStore.set(json.key, json.json);
+        client.incr('jsons');
     }
 
     static get(key, cb){
@@ -39,10 +39,11 @@ class DataManager {
         })
     }
 
-    static size(){
-        return dataStore.size;
+    static size(cb){
+        client.get('jsons', (err, data) => {
+            cb(data);
+        })
     }
-
 }
 
 module.exports = DataManager;

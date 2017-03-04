@@ -4,7 +4,9 @@ const DataManager = require('../model/dataManager');
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'To the RESTcue', items: DataManager.size() });
+    DataManager.size(data => {
+        res.render('index', { title: 'To the RESTcue', items:  data});
+    });
 });
 
 module.exports = router;
