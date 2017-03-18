@@ -1,7 +1,7 @@
 const Json = require('./jsonModel');
 const config = require('../config');
 const redis = require("redis"),
-    client = redis.createClient({host: config.redis});
+    client = redis.createClient({host: config.redis.ip});
 
 client.on("error", function (err) {
     console.log("Error " + err);

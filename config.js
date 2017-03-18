@@ -1,3 +1,5 @@
 module.exports = {
-    redis: '127.0.2.1'
+    redis: {
+        ip: process.env.REDIS_IP
+    }
 };

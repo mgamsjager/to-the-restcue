@@ -8,6 +8,11 @@ router.get('/json', (req, res, next) => {
     res.redirect('/');
 });
 
+router.get('/', (req, res, next) => {
+    res.redirect('/');
+});
+
+
 router.post('/json', (req, res, next) => {
     try {
         const jsonObject = JSON.parse(req.body.json);

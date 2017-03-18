@@ -10,7 +10,7 @@
     "log_date_format"  : "YYYY-MM-DD HH:mm Z",
     "env": {
       "NODE_ENV": "production",
-      "AWESOME_SERVICE_API_TOKEN": "xxx"
+      "REDIS_IP": "localhost"
     },
     "env_production" : {
        "NODE_ENV": "production"
