@@ -32,4 +32,17 @@ router.get('/json/:key', (req, res) => {
     })
 });
 
+
+router.post('/json/:key', (req, res) => {
+    const key = req.params.key;
+    res.set('Content-Type', 'application/json');
+    DataManager.has(key, (hasData) => {
+        if (hasData){
+                res.status(201).end();
+        } else {
+            res.status(404).end();
+        }
+    })
+});
+
 module.exports = router;
